@@ -6,8 +6,13 @@ public class main {
     //-------------------------------------useful functions for all answers---------------------------------------------
     static Scanner sc = new Scanner(System.in);
 
-    public static void printTempArray() {
-
+    public static void printTempArray(int [][] array) {
+        for(int l = 0; l < array.length; l++){
+            for(int c = 0; c < array[l].length; c++){
+                System.out.printf("%4d", array[l][c]);
+            }
+            System.out.printf("%n");
+        }
     }
 
     public static void printMAArray(){
@@ -42,8 +47,10 @@ public class main {
     }
 
     //------------------------------------------------------B-----------------------------------------------------------
-    public static void B() {
-
+    public static void B(int [][] tempArray) {
+        System.out.println("b)");
+        printTempArray(tempArray);
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------C-----------------------------------------------------------
@@ -111,6 +118,7 @@ public class main {
 
     //initiates app
     public static void main(String[] args) {
+
 
     }
 }
