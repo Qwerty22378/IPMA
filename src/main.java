@@ -15,31 +15,37 @@ public class main {
         }
     }
 
-    public static void printMAArray() {
+    public static void printMAArray(String[][] ma) {
+        for (int l = 0; l < ma.length; l++) {
+            for (int c = 0; c < ma[0].length; c++) {
+                System.out.printf("%s",ma[l][c]);
 
+            }
+            System.out.println();
+        }
     }
 
-    //convert temp array to MA array
-    public static void convertToMA() {
-        String[][] MA = new String[l][c];
+    //convert array array to MA array
+    public static String[][] convertToMA(int[][] array) {
+        String[][] ma = new String[array.length][array[0].length];
 
         final int Catastrophic = 40;
         final int Extreme = 30;
         final int High = 20;
 
-        for(int i=0;i<l;l++) {
-            for (int j = 0; j < c; j++) {
-                if (temp[i][j] >= Catastrophic)
-                    MA[i][j] = "C";
-                else if (temp[i][j] > Extreme)
-                    MA[i][j] = "E";
-                else if (temp[i][j] > High)
-                    MA[i][j] = "H";
-                else if (temp[l][j] <= High)
-                    MA[i][j] = "M";
+        for (int l = 0; l < array.length; l++) {
+            for (int c = 0; c < array[0].length; c++) {
+                if (array[l][c] >= Catastrophic)
+                    ma[l][c] = "C";
+                else if (array[l][c] >= Extreme)
+                    ma[l][c] = "E";
+                else if (array[l][c] > High)
+                    ma[l][c] = "H";
+                else if (array[l][c] <= High)
+                    ma[l][c] = "M";
             }
         }
-        return MA;
+        return ma;
     }
 
     //
@@ -82,7 +88,10 @@ public class main {
     }
 
     //------------------------------------------------------C-----------------------------------------------------------
-    public static void C(int[][] temp) {
+    public static void C(String[][] array) {
+        System.out.println("c)");
+        printMAArray(array);
+        System.out.printf("%n");
 
     }
 
@@ -148,6 +157,11 @@ public class main {
         //-------------B-------------
         //print answer
         B(tempArray);
+
+        //-------------C-------------
+        //Converter e imprimir mapa de alertas
+        String[][] ma = convertToMA(tempArray);
+        C(ma);
     }
 
 
