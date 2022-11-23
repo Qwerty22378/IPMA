@@ -51,8 +51,16 @@ public class main {
     //
 
     //calculates new temp array for a given temp deviation
-    public static void tempDeviation() {
+    public static int[][] tempDeviation(int[][] a, int deviation) {
+        int[][] array = a;
 
+        for(int l = 0; l < array.length; l++){
+            for(int c = 0; c < array[l].length; c++){
+                array[l][c] += deviation;
+            }
+        }
+
+        return array;
     }
 
     //------------------------------------------------------A-----------------------------------------------------------
