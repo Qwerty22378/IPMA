@@ -103,7 +103,7 @@ public class main {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    //handles answers, order and formatting
+    //handles variables answer's order
     public static void answers() {
 
     }
