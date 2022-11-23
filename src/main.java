@@ -21,7 +21,25 @@ public class main {
 
     //convert temp array to MA array
     public static void convertToMA() {
+        String[][] MA = new String[l][c];
 
+        final int Catastrophic = 40;
+        final int Extreme = 30;
+        final int High = 20;
+
+        for(int i=0;i<l;l++) {
+            for (int j = 0; j < c; j++) {
+                if (temp[i][j] >= Catastrophic)
+                    MA[i][j] = "C";
+                else if (temp[i][j] > Extreme)
+                    MA[i][j] = "E";
+                else if (temp[i][j] > High)
+                    MA[i][j] = "H";
+                else if (temp[l][j] <= High)
+                    MA[i][j] = "M";
+            }
+        }
+        return MA;
     }
 
     //
