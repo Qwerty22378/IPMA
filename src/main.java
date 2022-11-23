@@ -29,17 +29,23 @@ public class main {
     //------------------------------------------------------A-----------------------------------------------------------
     //reads location date and time
     public static void readMetaData() {
-
+        sc.nextLine();
     }
 
     //reads temperature array
-    public static void readArray() {
-
+    public static int[][] readArray() {
+        int l,c;
+        l=sc.nextInt();
+        c=sc.nextInt();
+        int [][]array=new int [l][c];
+        for (i=0;i<l;l++){
+            for(j=0;j<c;j++){
+                array[l][c]=sc.nextInt();
+            }
+        }
+        return array;
     }
 
-    public static void A() {
-
-    }
 
     //------------------------------------------------------B-----------------------------------------------------------
     public static void B() {
@@ -47,7 +53,7 @@ public class main {
     }
 
     //------------------------------------------------------C-----------------------------------------------------------
-    public static void C(){
+    public static void C(int [][]temp){
 
     }
 
@@ -106,6 +112,8 @@ public class main {
     //handles variables answer's order
     public static void answers() {
 
+        int[][] tempArray = readArray();
+        C(tempArray);
     }
 
 
