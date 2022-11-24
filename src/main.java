@@ -143,6 +143,7 @@ public class main {
         System.out.printf("HIGH         : %.2f%n", perc[1]);
         System.out.printf("EXTREME      : %.2f%n", perc[2]);
         System.out.printf("CATASTROPHIC : %.2f%n", perc[3]);
+        System.out.printf("%n");
 
     }
 
@@ -167,7 +168,7 @@ public class main {
     public static void F(int temp) {
         System.out.println("f)");
         System.out.printf("To get all terrain on CATASTROPHIC alert, the temperature has to rise : %dºC %n", temp);
-        System.out.println("%n");
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------G-----------------------------------------------------------
@@ -193,8 +194,53 @@ public class main {
     }
 
     //------------------------------------------------------I-----------------------------------------------------------
-    public static void I() {
 
+   public static void BucketPositioner(int [][]array) {
+       int[][] bucket = new int[3][3];
+       int fires,Mfires=0,Mcordx=0,Mcordy=0;
+       for (int l = 0; l < (array.length)-2; l++) {
+           for (int c = 0; c < (array[l].length)-2; c++) {
+
+                for(int x=0; x<3; x++){
+                    for(int y=0; y<3; y++){
+                        bucket[x][y]=array[l+x][c+y];
+                    }
+                }
+                fires=BucketScore(bucket);
+                if (fires>Mfires) {
+                    Mfires=fires;
+                    Mcordx = l;
+                    Mcordy = c;
+                }
+                if ((fires==Mfires) && (l<=Mcordx) && (c<=Mcordy)){
+                    Mcordx = l;
+                    Mcordy = c;
+                }
+
+           }
+       }
+       if (Mfires==0)
+           System.out.printf("no fire%n");
+       else
+           System.out.printf("drop water at (%d , %d)%n",Mcordx+1,Mcordy+1);
+
+   }
+   public static int BucketScore(int [][]Balde){
+        int fire=0;
+       for(int x=0; x<3; x++) {
+           for (int y = 0; y < 3; y++) {
+            if (Balde[x][y]>=50)
+                fire++;
+
+           }
+         }
+       return fire;
+       }
+
+    public static void I(int [][]tempArray) {
+        System.out.printf("i)%n");
+        printTempArray(tempArray);
+        BucketPositioner(tempArray);
     }
 
     //------------------------------------------------------J-----------------------------------------------------------
@@ -242,6 +288,12 @@ public class main {
         int[][] tempArrayDeviated2  = tempDeviation(tempArrayDeviated, Deviation2);
         String [][]maTempArrayDeviated2= convertToMA(tempArrayDeviated2);
         G(maTempArrayDeviated2,maArrayDeviated);
+
+        //-------------I-------------
+
+        I(tempArrayDeviated2);
+
+
     }
 
 
