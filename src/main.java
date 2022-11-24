@@ -104,8 +104,14 @@ public class main {
     }
 
     //------------------------------------------------------D-----------------------------------------------------------
-    public static void D() {
+    public static void D(int [][] mt, String[][] ma) {
+        System.out.println("d)");
 
+        printTempArray(mt);
+        System.out.printf("%n");
+
+        printMAArray(ma);
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------E-----------------------------------------------------------
@@ -132,8 +138,7 @@ public class main {
         return perc;
     }
 
-    public static void E(String[][] array) {
-        float[] perc = alertPercentage(array);
+    public static void E(int[] perc) {
         System.out.printf("MODERATE     : %.2f%n", perc[0]);
         System.out.printf("HIGH         : %.2f%n", perc[1]);
         System.out.printf("EXTREME      : %.2f%n", perc[2]);
@@ -194,9 +199,17 @@ public class main {
         String[][] ma = convertToMA(tempArray);
         C(ma);
 
-
+        //-------------D-------------
+        // Calculate temp array with a deviation
+        final int Deviation = -10;
+        int[][] tempArrayDeviated = tempDeviation(tempArray, Deviation);
+        String[][] maArrayDeviated = convertToMA(tempArrayDeviated);
+        //print answer
+        D(tempArrayDeviated, maArrayDeviated);
+        
         //-------------E-------------
-        E(ma);
+        float[] alertPerc = alertPercentage(array);
+        E(alertPerc);
 
     }
 
