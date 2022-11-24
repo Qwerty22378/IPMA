@@ -39,9 +39,9 @@ public class main {
                     ma[l][c] = "C";
                 else if (array[l][c] >= Extreme)
                     ma[l][c] = "E";
-                else if (array[l][c] > High)
+                else if (array[l][c] >= High)
                     ma[l][c] = "H";
-                else if (array[l][c] <= High)
+                else if (array[l][c] < High)
                     ma[l][c] = "M";
             }
         }
@@ -138,7 +138,7 @@ public class main {
         return perc;
     }
 
-    public static void E(int[] perc) {
+    public static void E(float[] perc) {
         System.out.printf("MODERATE     : %.2f%n", perc[0]);
         System.out.printf("HIGH         : %.2f%n", perc[1]);
         System.out.printf("EXTREME      : %.2f%n", perc[2]);
@@ -158,12 +158,19 @@ public class main {
 
     //------------------------------------------------------G-----------------------------------------------------------
     //calculate the percentage of that changed
-    public static void alertChanged() {
-
+    public static float alertChanged(String [][]array,String [][]arrayD) {
+        int Changed=0;
+        for (int l = 0; l < array.length; l++) {
+            for (int c = 0; c < array[l].length; c++) {
+                if (!(array[l][c].equals(arrayD[l][c])))
+                    Changed++;
+            }
+        }
+        return ((Changed / ((float)(array.length) * (array[0].length))) * 100);
     }
-
-    public static void G() {
-
+    public static void G(String [][]matempArraydevitated2,String[][]maTempArrayDevitated) {
+        System.out.println("g)");
+        System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n",alertChanged(matempArraydevitated2,maTempArrayDevitated));
     }
 
     //------------------------------------------------------H-----------------------------------------------------------
@@ -208,9 +215,14 @@ public class main {
         D(tempArrayDeviated, maArrayDeviated);
         
         //-------------E-------------
-        float[] alertPerc = alertPercentage(array);
+        float[] alertPerc = alertPercentage(maArrayDeviated);
         E(alertPerc);
 
+        //-------------G-------------
+        final int Deviation2 = 10;
+        int[][] tempArrayDeviated2  = tempDeviation(tempArrayDeviated, Deviation2);
+        String [][]maTempArrayDeviated2= convertToMA(tempArrayDeviated2);
+        G(maTempArrayDeviated2,maArrayDeviated);
     }
 
 
