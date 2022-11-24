@@ -18,14 +18,14 @@ public class main {
     public static void printMAArray(String[][] ma) {
         for (int l = 0; l < ma.length; l++) {
             for (int c = 0; c < ma[0].length; c++) {
-                System.out.printf("%s",ma[l][c]);
+                System.out.printf("%s", ma[l][c]);
 
             }
             System.out.println();
         }
     }
 
-    //convert array array to MA array
+    //convert  array to MA array
     public static String[][] convertToMA(int[][] array) {
         String[][] ma = new String[array.length][array[0].length];
 
@@ -54,8 +54,8 @@ public class main {
     public static int[][] tempDeviation(int[][] a, int deviation) {
         int[][] array = a;
 
-        for(int l = 0; l < array.length; l++){
-            for(int c = 0; c < array[l].length; c++){
+        for (int l = 0; l < array.length; l++) {
+            for (int c = 0; c < array[l].length; c++) {
                 array[l][c] += deviation;
             }
         }
@@ -110,11 +110,34 @@ public class main {
 
     //------------------------------------------------------E-----------------------------------------------------------
     //calculates percentage of each alert type
-    public static void alertPercentage() {
-
+    public static float[] alertPercentage(String[][] array) {
+        int cat = 0, ext = 0, hig = 0, mod = 0;
+        float[] perc = new float[4];
+        for (int l = 0; l < array.length; l++) {
+            for (int c = 0; c < array[l].length; c++) {
+                if (array[l][c].equals("C"))
+                    cat++;
+                else if (array[l][c].equals("H"))
+                    hig++;
+                else if (array[l][c].equals("E"))
+                    ext++;
+                else if (array[l][c].equals("M"))
+                    mod++;
+            }
+        }
+        perc[0] = ((mod / ((float)(array.length) * (array[0].length))) * 100);
+        perc[1] = ((hig / ((float)(array.length) * (array[0].length))) * 100);
+        perc[2] = ((ext / ((float)(array.length) * (array[0].length))) * 100);
+        perc[3] = ((cat / ((float)(array.length) * (array[0].length))) * 100);
+        return perc;
     }
 
-    public static void E() {
+    public static void E(String[][] array) {
+        float[] perc = alertPercentage(array);
+        System.out.printf("MODERATE     : %.2f%n", perc[0]);
+        System.out.printf("HIGH         : %.2f%n", perc[1]);
+        System.out.printf("EXTREME      : %.2f%n", perc[2]);
+        System.out.printf("CATASTROPHIC : %.2f%n", perc[3]);
 
     }
 
@@ -170,6 +193,11 @@ public class main {
         //Converter e imprimir mapa de alertas
         String[][] ma = convertToMA(tempArray);
         C(ma);
+
+
+        //-------------E-------------
+        E(ma);
+
     }
 
 
