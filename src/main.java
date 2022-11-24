@@ -148,12 +148,26 @@ public class main {
 
     //------------------------------------------------------F-----------------------------------------------------------
     //calculates temp rise to get catastrophic in all terrain
-    public static void tempRiseCatastrophic() {
+    public static int findMin(int[][] array){
+        int min = array[0][0];
+        for(int l = 0; l < array.length; l++)
+            for (int c = 0; c < array[l].length; c++)
+                if (min > array[l][c])
+                    min = array[l][c];
 
+        return min;
     }
 
-    public static void F() {
+    public static int tempRiseCatastrophic(int[][] tempArray) {
+        final int Catastrophic = 40;
+        int min = findMin(tempArray);
+        return Catastrophic - min;
+    }
 
+    public static void F(int temp) {
+        System.out.println("f)");
+        System.out.printf("To get all terrain on CATASTROPHIC alert, the temperature has to rise : %dºC %n", temp);
+        System.out.println("%n");
     }
 
     //------------------------------------------------------G-----------------------------------------------------------
@@ -210,6 +224,11 @@ public class main {
         //-------------E-------------
         float[] alertPerc = alertPercentage(array);
         E(alertPerc);
+
+        //-------------F-------------
+        int tempRise = tempRiseCatastrophic(tempArrayDeviated);
+        //print answer
+        F(tempRise);
 
     }
 
