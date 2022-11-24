@@ -104,7 +104,7 @@ public class main {
     }
 
     //------------------------------------------------------D-----------------------------------------------------------
-    public static void D(int [][] mt, String[][] ma) {
+    public static void D(int[][] mt, String[][] ma) {
         System.out.println("d)");
 
         printTempArray(mt);
@@ -131,26 +131,30 @@ public class main {
                     mod++;
             }
         }
-        perc[0] = ((mod / ((float)(array.length) * (array[0].length))) * 100);
-        perc[1] = ((hig / ((float)(array.length) * (array[0].length))) * 100);
-        perc[2] = ((ext / ((float)(array.length) * (array[0].length))) * 100);
-        perc[3] = ((cat / ((float)(array.length) * (array[0].length))) * 100);
+        perc[0] = ((mod / ((float) (array.length) * (array[0].length))) * 100);
+        perc[1] = ((hig / ((float) (array.length) * (array[0].length))) * 100);
+        perc[2] = ((ext / ((float) (array.length) * (array[0].length))) * 100);
+        perc[3] = ((cat / ((float) (array.length) * (array[0].length))) * 100);
         return perc;
     }
 
-    public static void E(int[] perc) {
+    public static void E(float[] perc) {
+        System.out.println("e)");
+
         System.out.printf("MODERATE     : %.2f%n", perc[0]);
         System.out.printf("HIGH         : %.2f%n", perc[1]);
         System.out.printf("EXTREME      : %.2f%n", perc[2]);
         System.out.printf("CATASTROPHIC : %.2f%n", perc[3]);
 
+        System.out.printf("%n");
+
     }
 
     //------------------------------------------------------F-----------------------------------------------------------
     //calculates temp rise to get catastrophic in all terrain
-    public static int findMin(int[][] array){
+    public static int findMin(int[][] array) {
         int min = array[0][0];
-        for(int l = 0; l < array.length; l++)
+        for (int l = 0; l < array.length; l++)
             for (int c = 0; c < array[l].length; c++)
                 if (min > array[l][c])
                     min = array[l][c];
@@ -167,7 +171,7 @@ public class main {
     public static void F(int temp) {
         System.out.println("f)");
         System.out.printf("To get all terrain on CATASTROPHIC alert, the temperature has to rise : %dºC %n", temp);
-        System.out.println("%n");
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------G-----------------------------------------------------------
@@ -181,8 +185,23 @@ public class main {
     }
 
     //------------------------------------------------------H-----------------------------------------------------------
-    public static void H() {
+    // calculates new ma array for wind coming from north (if a tile is C south of that tile becomes C)
+    public static String[][] windFromNorth(String[][] maArray) {
+        String[][] array = maArray;
+        for (int l = 0; l < array.length - 1; l++){
+            for(int c = 0; c < array[l].length; c++){
+                if(array[l][c].equals("c")){
+                    array[l + 1][c] = "C";
+                }
+            }
+        }
+        return array;
+    }
 
+    public static void H(String[][] array) {
+        System.out.println("h)");
+        printMAArray(array);
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------I-----------------------------------------------------------
@@ -209,8 +228,9 @@ public class main {
         B(tempArray);
 
         //-------------C-------------
-        //Converter e imprimir mapa de alertas
+        //Convert temp to ma array
         String[][] ma = convertToMA(tempArray);
+        //print answer
         C(ma);
 
         //-------------D-------------
@@ -220,15 +240,24 @@ public class main {
         String[][] maArrayDeviated = convertToMA(tempArrayDeviated);
         //print answer
         D(tempArrayDeviated, maArrayDeviated);
-        
+
         //-------------E-------------
-        float[] alertPerc = alertPercentage(array);
+        float[] alertPerc = alertPercentage(maArrayDeviated);
         E(alertPerc);
 
         //-------------F-------------
         int tempRise = tempRiseCatastrophic(tempArrayDeviated);
         //print answer
         F(tempRise);
+
+
+        //-------------H-------------
+        //calculate new ma array for
+        String[][] windMaArray = windFromNorth(maArrayDeviated);
+        //print answer
+        H(windMaArray);
+
+
 
     }
 
