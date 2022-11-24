@@ -104,8 +104,14 @@ public class main {
     }
 
     //------------------------------------------------------D-----------------------------------------------------------
-    public static void D() {
+    public static void D(int [][] mt, String[][] ma) {
+        System.out.println("d)");
 
+        printTempArray(mt);
+        System.out.printf("%n");
+
+        printMAArray(ma);
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------E-----------------------------------------------------------
@@ -170,6 +176,17 @@ public class main {
         //Converter e imprimir mapa de alertas
         String[][] ma = convertToMA(tempArray);
         C(ma);
+
+
+
+        //-------------D-------------
+        // Calculate temp array with a deviation
+        final int Deviation = -10;
+        int[][] tempArrayDeviated = tempDeviation(tempArray, Deviation);
+        String[][] maArrayDeviated = convertToMA(tempArrayDeviated);
+        //print answer
+        D(tempArrayDeviated, maArrayDeviated);
+
     }
 
 
