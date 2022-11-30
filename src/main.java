@@ -1,12 +1,10 @@
 package src;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class main {
-    //-------------------------------------useful functions for all answers---------------------------------------------
+    //-------------------------------------useful functions for all answers--------------------------------------------- static Scanner sc = new Scanner(System.in);
     static Scanner sc = new Scanner(System.in);
-
     public static void printTempArray(int[][] array) {
         for (int l = 0; l < array.length; l++) {
             for (int c = 0; c < array[l].length; c++) {
@@ -20,7 +18,6 @@ public class main {
         for (int l = 0; l < ma.length; l++) {
             for (int c = 0; c < ma[0].length; c++) {
                 System.out.printf("%s", ma[l][c]);
-
             }
             System.out.println();
         }
@@ -48,8 +45,6 @@ public class main {
         }
         return ma;
     }
-
-    //
 
     //calculates new temp array for a given temp deviation
     public static int[][] tempDeviation(int[][] a, int deviation) {
@@ -272,10 +267,10 @@ public class main {
         boolean safe;
 
         int c = array[0].length - 1;
-        while (c >= 0 && column == -1){
+        while (c >= 0 && column == -1) {
 
             safe = true;
-            for(int l = 0; l < array.length; l++){
+            for (int l = 0; l < array.length; l++) {
                 if (array[l][c].equals("C"))
                     safe = false;
             }
@@ -292,7 +287,7 @@ public class main {
         System.out.println("j)");
 
         if (safe >= 0)
-            System.out.printf("safe column = %d%n", safe);
+            System.out.printf("safe column = (%d)%n", safe);
         else
             System.out.println("safe column = NONE");
 
@@ -312,37 +307,37 @@ public class main {
         B(tempArray);
 
         //-------------C-------------
-        //Convert temp to ma array
-        String[][] ma = convertToMA(tempArray);
+        //Convert temp to maArray array
+        String[][] maArray = convertToMA(tempArray);
         //print answer
-        C(ma);
+        C(maArray);
 
         //-------------D-------------
         // Calculate temp array with a deviation
         final int Deviation1 = -10;
-        int[][] tempArrayDeviated = tempDeviation(tempArray, Deviation1);
-        String[][] maArrayDeviated = convertToMA(tempArrayDeviated);
+        int[][] tempArrayDeviated1 = tempDeviation(tempArray, Deviation1);
+        String[][] maArrayDeviated1 = convertToMA(tempArrayDeviated1);
         //print answer
-        D(tempArrayDeviated, maArrayDeviated);
+        D(tempArrayDeviated1, maArrayDeviated1);
 
         //-------------E-------------
-        float[] alertPerc = alertPercentage(maArrayDeviated);
+        float[] alertPerc = alertPercentage(maArrayDeviated1);
         E(alertPerc);
 
         //-------------F-------------
-        int tempRise = tempRiseCatastrophic(tempArrayDeviated);
+        int tempRise = tempRiseCatastrophic(tempArrayDeviated1);
         //print answer
         F(tempRise);
 
         //-------------G-------------
         final int Deviation2 = 10;
-        int[][] tempArrayDeviated2 = tempDeviation(tempArrayDeviated, Deviation2);
-        String[][] maTempArrayDeviated2 = convertToMA(tempArrayDeviated2);
-        G(maTempArrayDeviated2, maArrayDeviated);
+        int[][] tempArrayDeviated2 = tempDeviation(tempArrayDeviated1, Deviation2);
+        String[][] maArrayDeviated2 = convertToMA(tempArrayDeviated2);
+        G(maArrayDeviated2, maArrayDeviated1);
 
         //-------------H-------------
-        //calculate new ma array for
-        String[][] windMaArray = windFromNorth(ma);
+        //calculate new maArray array for
+        String[][] windMaArray = windFromNorth(maArray);
         //print answer
         H(windMaArray);
 
@@ -350,7 +345,7 @@ public class main {
         I(tempArrayDeviated2);
 
         //-------------J-------------
-        int safeColumn = findSafeColumn(maArrayDeviated);
+        int safeColumn = findSafeColumn(maArrayDeviated2);
         //print answer
         J(safeColumn);
 
