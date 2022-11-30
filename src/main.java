@@ -1,5 +1,6 @@
 package src;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class main {
@@ -104,7 +105,7 @@ public class main {
     }
 
     //------------------------------------------------------D-----------------------------------------------------------
-    public static void D(int [][] mt, String[][] ma) {
+    public static void D(int[][] mt, String[][] ma) {
         System.out.println("d)");
 
         printTempArray(mt);
@@ -131,10 +132,10 @@ public class main {
                     mod++;
             }
         }
-        perc[0] = ((mod / ((float)(array.length) * (array[0].length))) * 100);
-        perc[1] = ((hig / ((float)(array.length) * (array[0].length))) * 100);
-        perc[2] = ((ext / ((float)(array.length) * (array[0].length))) * 100);
-        perc[3] = ((cat / ((float)(array.length) * (array[0].length))) * 100);
+        perc[0] = ((mod / ((float) (array.length) * (array[0].length))) * 100);
+        perc[1] = ((hig / ((float) (array.length) * (array[0].length))) * 100);
+        perc[2] = ((ext / ((float) (array.length) * (array[0].length))) * 100);
+        perc[3] = ((cat / ((float) (array.length) * (array[0].length))) * 100);
         return perc;
     }
 
@@ -176,19 +177,20 @@ public class main {
 
     //------------------------------------------------------G-----------------------------------------------------------
     //calculate the percentage of that changed
-    public static float alertChanged(String [][]array,String [][]arrayD) {
-        int Changed=0;
+    public static float alertChanged(String[][] array, String[][] arrayD) {
+        int Changed = 0;
         for (int l = 0; l < array.length; l++) {
             for (int c = 0; c < array[l].length; c++) {
                 if (!(array[l][c].equals(arrayD[l][c])))
                     Changed++;
             }
         }
-        return ((Changed / ((float)(array.length) * (array[0].length))) * 100);
+        return ((Changed / ((float) (array.length) * (array[0].length))) * 100);
     }
-    public static void G(String [][]matempArraydevitated2,String[][]maTempArrayDevitated) {
+
+    public static void G(String[][] matempArraydevitated2, String[][] maTempArrayDevitated) {
         System.out.println("g)");
-        System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n",alertChanged(matempArraydevitated2,maTempArrayDevitated));
+        System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n", alertChanged(matempArraydevitated2, maTempArrayDevitated));
         System.out.printf("%n");
     }
 
@@ -196,9 +198,9 @@ public class main {
     // calculates new ma array for wind coming from north (if a tile is C south of that tile becomes C)
     public static String[][] windFromNorth(String[][] maArray) {
         String[][] array = maArray;
-        for (int l = array.length - 2; l >= 0; l--){
-            for(int c = 0; c < array[l].length; c++){
-                if(array[l][c].equals("C")){
+        for (int l = array.length - 2; l >= 0; l--) {
+            for (int c = 0; c < array[l].length; c++) {
+                if (array[l][c].equals("C")) {
                     array[l + 1][c] = "C";
                 }
             }
@@ -214,57 +216,87 @@ public class main {
 
     //------------------------------------------------------I-----------------------------------------------------------
 
-   public static void BucketPositioner(int [][]array) {
-       int[][] bucket = new int[3][3];
-       int fires,Mfires=0,Mcordx=0,Mcordy=0;
-       for (int l = 0; l < (array.length)-2; l++) {
-           for (int c = 0; c < (array[l].length)-2; c++) {
+    public static void BucketPositioner(int[][] array) {
+        int[][] bucket = new int[3][3];
+        int fires, Mfires = 0, Mcordx = 0, Mcordy = 0;
+        for (int l = 0; l < (array.length) - 2; l++) {
+            for (int c = 0; c < (array[l].length) - 2; c++) {
 
-                for(int x=0; x<3; x++){
-                    for(int y=0; y<3; y++){
-                        bucket[x][y]=array[l+x][c+y];
+                for (int x = 0; x < 3; x++) {
+                    for (int y = 0; y < 3; y++) {
+                        bucket[x][y] = array[l + x][c + y];
                     }
                 }
-                fires=BucketScore(bucket);
-                if (fires>Mfires) {
-                    Mfires=fires;
+                fires = BucketScore(bucket);
+                if (fires > Mfires) {
+                    Mfires = fires;
                     Mcordx = l;
                     Mcordy = c;
                 }
-                if ((fires==Mfires) && (l<=Mcordx) && (c<=Mcordy)){
+                if ((fires == Mfires) && (l <= Mcordx) && (c <= Mcordy)) {
                     Mcordx = l;
                     Mcordy = c;
                 }
 
-           }
-       }
-       if (Mfires==0)
-           System.out.printf("no fire%n");
-       else
-           System.out.printf("drop water at (%d , %d)%n",Mcordx+1,Mcordy+1);
+            }
+        }
+        if (Mfires == 0)
+            System.out.printf("no fire%n");
+        else
+            System.out.printf("drop water at (%d , %d)%n", Mcordx + 1, Mcordy + 1);
 
-   }
-   public static int BucketScore(int [][]Balde){
-        int fire=0;
-       for(int x=0; x<3; x++) {
-           for (int y = 0; y < 3; y++) {
-            if (Balde[x][y]>=50)
-                fire++;
+    }
 
-           }
-         }
-       return fire;
-       }
+    public static int BucketScore(int[][] Bucket) {
+        int fire = 0;
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if (Bucket[x][y] >= 50)
+                    fire++;
 
-    public static void I(int [][]tempArray) {
+            }
+        }
+        return fire;
+    }
+
+    public static void I(int[][] tempArray) {
         System.out.printf("i)%n");
         printTempArray(tempArray);
         BucketPositioner(tempArray);
     }
 
     //------------------------------------------------------J-----------------------------------------------------------
-    public static void J() {
+    // finds a safe column where is safe to stand (there is no Catastrophic temp north or south)
+    public static int findSafeColumn(String[][] array) {
+        int column = -1;
+        boolean safe;
 
+        int c = array[0].length - 1;
+        while (c >= 0 && column == -1){
+
+            safe = true;
+            for(int l = 0; l < array.length; l++){
+                if (array[l][c].equals("C"))
+                    safe = false;
+            }
+            if (safe)
+                column = c;
+
+            c--;
+        }
+
+        return column;
+    }
+
+    public static void J(int safe) {
+        System.out.println("j)");
+
+        if (safe >= 0)
+            System.out.printf("safe column = %d%n", safe);
+        else
+            System.out.println("safe column = NONE");
+
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -304,9 +336,9 @@ public class main {
 
         //-------------G-------------
         final int Deviation2 = 10;
-        int[][] tempArrayDeviated2  = tempDeviation(tempArrayDeviated, Deviation2);
-        String [][]maTempArrayDeviated2= convertToMA(tempArrayDeviated2);
-        G(maTempArrayDeviated2,maArrayDeviated);
+        int[][] tempArrayDeviated2 = tempDeviation(tempArrayDeviated, Deviation2);
+        String[][] maTempArrayDeviated2 = convertToMA(tempArrayDeviated2);
+        G(maTempArrayDeviated2, maArrayDeviated);
 
         //-------------H-------------
         //calculate new ma array for
@@ -317,8 +349,10 @@ public class main {
         //-------------I-------------
         I(tempArrayDeviated2);
 
-
-
+        //-------------J-------------
+        int safeColumn = findSafeColumn(maArrayDeviated);
+        //print answer
+        J(safeColumn);
 
     }
 
