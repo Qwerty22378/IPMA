@@ -211,11 +211,13 @@ public class main {
 
     //------------------------------------------------------I-----------------------------------------------------------
 
+
     public static void BucketPositioner(int[][] array) {
         int[][] bucket = new int[3][3];
         int fires, Mfires = 0, Mcordx = 0, Mcordy = 0;
         for (int l = 0; l < (array.length) - 2; l++) {
             for (int c = 0; c < (array[l].length) - 2; c++) {
+
 
                 for (int x = 0; x < 3; x++) {
                     for (int y = 0; y < 3; y++) {
@@ -233,31 +235,36 @@ public class main {
                     Mcordy = c;
                 }
 
-            }
-        }
-        if (Mfires == 0)
-            System.out.printf("no fire%n");
-        else
-            System.out.printf("drop water at (%d , %d)%n", Mcordx + 1, Mcordy + 1);
 
-    }
+           }
+       }
+       Coordinates[0]=Mfires;
+       Coordinates[1]=Mcordx+1;
+       Coordinates[2]=Mcordy+1;
+       return Coordinates;
 
-    public static int BucketScore(int[][] Bucket) {
-        int fire = 0;
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                if (Bucket[x][y] >= 50)
-                    fire++;
+   }
+   public static int BucketScore(int [][]Balde){
+        int fire=0;
+       for(int x=0; x<3; x++) {
+           for (int y = 0; y < 3; y++) {
+            if (Balde[x][y]>=50)
+                fire++;
 
-            }
-        }
-        return fire;
-    }
+           }
+         }
+       return fire;
+       }
 
-    public static void I(int[][] tempArray) {
+    public static void I(int [][]tempArray) {
+        int []Coordinates=new int [3];
         System.out.printf("i)%n");
         printTempArray(tempArray);
-        BucketPositioner(tempArray);
+        Coordinates=BucketPositioner(tempArray);
+        if (Coordinates[0]==0)
+            System.out.printf("no fire%n");
+        else
+            System.out.printf("drop water at (%d , %d)%n",Coordinates[1],Coordinates[2]);
     }
 
     //------------------------------------------------------J-----------------------------------------------------------
@@ -343,6 +350,7 @@ public class main {
 
         //-------------I-------------
         I(tempArrayDeviated2);
+        //test
 
         //-------------J-------------
         int safeColumn = findSafeColumn(maArrayDeviated2);
