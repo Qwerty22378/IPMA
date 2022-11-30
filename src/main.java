@@ -189,15 +189,16 @@ public class main {
     public static void G(String [][]matempArraydevitated2,String[][]maTempArrayDevitated) {
         System.out.println("g)");
         System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n",alertChanged(matempArraydevitated2,maTempArrayDevitated));
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------H-----------------------------------------------------------
     // calculates new ma array for wind coming from north (if a tile is C south of that tile becomes C)
     public static String[][] windFromNorth(String[][] maArray) {
         String[][] array = maArray;
-        for (int l = 0; l < array.length - 1; l++){
+        for (int l = array.length - 2; l >= 0; l--){
             for(int c = 0; c < array[l].length; c++){
-                if(array[l][c].equals("c")){
+                if(array[l][c].equals("C")){
                     array[l + 1][c] = "C";
                 }
             }
@@ -274,7 +275,6 @@ public class main {
         readMetaData();
         int[][] tempArray = readArray();
 
-
         //-------------B-------------
         //print answer
         B(tempArray);
@@ -287,8 +287,8 @@ public class main {
 
         //-------------D-------------
         // Calculate temp array with a deviation
-        final int Deviation = -10;
-        int[][] tempArrayDeviated = tempDeviation(tempArray, Deviation);
+        final int Deviation1 = -10;
+        int[][] tempArrayDeviated = tempDeviation(tempArray, Deviation1);
         String[][] maArrayDeviated = convertToMA(tempArrayDeviated);
         //print answer
         D(tempArrayDeviated, maArrayDeviated);
@@ -308,17 +308,15 @@ public class main {
         String [][]maTempArrayDeviated2= convertToMA(tempArrayDeviated2);
         G(maTempArrayDeviated2,maArrayDeviated);
 
-        //-------------I-------------
-
-        I(tempArrayDeviated2);
-
-
-
         //-------------H-------------
         //calculate new ma array for
-        String[][] windMaArray = windFromNorth(maArrayDeviated);
+        String[][] windMaArray = windFromNorth(ma);
         //print answer
         H(windMaArray);
+
+        //-------------I-------------
+        I(tempArrayDeviated2);
+
 
 
 
