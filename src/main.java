@@ -3,9 +3,8 @@ package src;
 import java.util.Scanner;
 
 public class main {
-    //-------------------------------------useful functions for all answers---------------------------------------------
+    //-------------------------------------useful functions for all answers--------------------------------------------- static Scanner sc = new Scanner(System.in);
     static Scanner sc = new Scanner(System.in);
-
     public static void printTempArray(int[][] array) {
         for (int l = 0; l < array.length; l++) {
             for (int c = 0; c < array[l].length; c++) {
@@ -19,7 +18,6 @@ public class main {
         for (int l = 0; l < ma.length; l++) {
             for (int c = 0; c < ma[0].length; c++) {
                 System.out.printf("%s", ma[l][c]);
-
             }
             System.out.println();
         }
@@ -47,8 +45,6 @@ public class main {
         }
         return ma;
     }
-
-    //
 
     //calculates new temp array for a given temp deviation
     public static int[][] tempDeviation(int[][] a, int deviation) {
@@ -104,7 +100,7 @@ public class main {
     }
 
     //------------------------------------------------------D-----------------------------------------------------------
-    public static void D(int [][] mt, String[][] ma) {
+    public static void D(int[][] mt, String[][] ma) {
         System.out.println("d)");
 
         printTempArray(mt);
@@ -131,10 +127,10 @@ public class main {
                     mod++;
             }
         }
-        perc[0] = ((mod / ((float)(array.length) * (array[0].length))) * 100);
-        perc[1] = ((hig / ((float)(array.length) * (array[0].length))) * 100);
-        perc[2] = ((ext / ((float)(array.length) * (array[0].length))) * 100);
-        perc[3] = ((cat / ((float)(array.length) * (array[0].length))) * 100);
+        perc[0] = ((mod / ((float) (array.length) * (array[0].length))) * 100);
+        perc[1] = ((hig / ((float) (array.length) * (array[0].length))) * 100);
+        perc[2] = ((ext / ((float) (array.length) * (array[0].length))) * 100);
+        perc[3] = ((cat / ((float) (array.length) * (array[0].length))) * 100);
         return perc;
     }
 
@@ -176,19 +172,20 @@ public class main {
 
     //------------------------------------------------------G-----------------------------------------------------------
     //calculate the percentage of that changed
-    public static float alertChanged(String [][]array,String [][]arrayD) {
-        int Changed=0;
+    public static float alertChanged(String[][] array, String[][] arrayD) {
+        int Changed = 0;
         for (int l = 0; l < array.length; l++) {
             for (int c = 0; c < array[l].length; c++) {
                 if (!(array[l][c].equals(arrayD[l][c])))
                     Changed++;
             }
         }
-        return ((Changed / ((float)(array.length) * (array[0].length))) * 100);
+        return ((Changed / ((float) (array.length) * (array[0].length))) * 100);
     }
-    public static void G(String [][]matempArraydevitated2,String[][]maTempArrayDevitated) {
+
+    public static void G(String[][] matempArraydevitated2, String[][] maTempArrayDevitated) {
         System.out.println("g)");
-        System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n",alertChanged(matempArraydevitated2,maTempArrayDevitated));
+        System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n", alertChanged(matempArraydevitated2, maTempArrayDevitated));
         System.out.printf("%n");
     }
 
@@ -196,9 +193,9 @@ public class main {
     // calculates new ma array for wind coming from north (if a tile is C south of that tile becomes C)
     public static String[][] windFromNorth(String[][] maArray) {
         String[][] array = maArray;
-        for (int l = array.length - 2; l >= 0; l--){
-            for(int c = 0; c < array[l].length; c++){
-                if(array[l][c].equals("C")){
+        for (int l = array.length - 2; l >= 0; l--) {
+            for (int c = 0; c < array[l].length; c++) {
+                if (array[l][c].equals("C")) {
                     array[l + 1][c] = "C";
                 }
             }
@@ -214,28 +211,30 @@ public class main {
 
     //------------------------------------------------------I-----------------------------------------------------------
 
-   public static int[] BucketPositioner(int [][]array) {
-        int []Coordinates= new int[3];
-       int[][] bucket = new int[3][3];
-       int fires,Mfires=0,Mcordx=0,Mcordy=0;
-       for (int l = 0; l < (array.length)-2; l++) {
-           for (int c = 0; c < (array[l].length)-2; c++) {
 
-                for(int x=0; x<3; x++){
-                    for(int y=0; y<3; y++){
-                        bucket[x][y]=array[l+x][c+y];
+    public static void BucketPositioner(int[][] array) {
+        int[][] bucket = new int[3][3];
+        int fires, Mfires = 0, Mcordx = 0, Mcordy = 0;
+        for (int l = 0; l < (array.length) - 2; l++) {
+            for (int c = 0; c < (array[l].length) - 2; c++) {
+
+
+                for (int x = 0; x < 3; x++) {
+                    for (int y = 0; y < 3; y++) {
+                        bucket[x][y] = array[l + x][c + y];
                     }
                 }
-                fires=BucketScore(bucket);
-                if (fires>Mfires) {
-                    Mfires=fires;
+                fires = BucketScore(bucket);
+                if (fires > Mfires) {
+                    Mfires = fires;
                     Mcordx = l;
                     Mcordy = c;
                 }
-                if ((fires==Mfires) && (l<=Mcordx) && (c<=Mcordy)){
+                if ((fires == Mfires) && (l <= Mcordx) && (c <= Mcordy)) {
                     Mcordx = l;
                     Mcordy = c;
                 }
+
 
            }
        }
@@ -269,8 +268,37 @@ public class main {
     }
 
     //------------------------------------------------------J-----------------------------------------------------------
-    public static void J() {
+    // finds a safe column where is safe to stand (there is no Catastrophic temp north or south)
+    public static int findSafeColumn(String[][] array) {
+        int column = -1;
+        boolean safe;
 
+        int c = array[0].length - 1;
+        while (c >= 0 && column == -1) {
+
+            safe = true;
+            for (int l = 0; l < array.length; l++) {
+                if (array[l][c].equals("C"))
+                    safe = false;
+            }
+            if (safe)
+                column = c;
+
+            c--;
+        }
+
+        return column;
+    }
+
+    public static void J(int safe) {
+        System.out.println("j)");
+
+        if (safe >= 0)
+            System.out.printf("safe column = (%d)%n", safe);
+        else
+            System.out.println("safe column = NONE");
+
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -286,37 +314,37 @@ public class main {
         B(tempArray);
 
         //-------------C-------------
-        //Convert temp to ma array
-        String[][] ma = convertToMA(tempArray);
+        //Convert temp to maArray array
+        String[][] maArray = convertToMA(tempArray);
         //print answer
-        C(ma);
+        C(maArray);
 
         //-------------D-------------
         // Calculate temp array with a deviation
         final int Deviation1 = -10;
-        int[][] tempArrayDeviated = tempDeviation(tempArray, Deviation1);
-        String[][] maArrayDeviated = convertToMA(tempArrayDeviated);
+        int[][] tempArrayDeviated1 = tempDeviation(tempArray, Deviation1);
+        String[][] maArrayDeviated1 = convertToMA(tempArrayDeviated1);
         //print answer
-        D(tempArrayDeviated, maArrayDeviated);
+        D(tempArrayDeviated1, maArrayDeviated1);
 
         //-------------E-------------
-        float[] alertPerc = alertPercentage(maArrayDeviated);
+        float[] alertPerc = alertPercentage(maArrayDeviated1);
         E(alertPerc);
 
         //-------------F-------------
-        int tempRise = tempRiseCatastrophic(tempArrayDeviated);
+        int tempRise = tempRiseCatastrophic(tempArrayDeviated1);
         //print answer
         F(tempRise);
 
         //-------------G-------------
         final int Deviation2 = 10;
-        int[][] tempArrayDeviated2  = tempDeviation(tempArrayDeviated, Deviation2);
-        String [][]maTempArrayDeviated2= convertToMA(tempArrayDeviated2);
-        G(maTempArrayDeviated2,maArrayDeviated);
+        int[][] tempArrayDeviated2 = tempDeviation(tempArrayDeviated1, Deviation2);
+        String[][] maArrayDeviated2 = convertToMA(tempArrayDeviated2);
+        G(maArrayDeviated2, maArrayDeviated1);
 
         //-------------H-------------
-        //calculate new ma array for
-        String[][] windMaArray = windFromNorth(ma);
+        //calculate new maArray array for
+        String[][] windMaArray = windFromNorth(maArray);
         //print answer
         H(windMaArray);
 
@@ -324,8 +352,10 @@ public class main {
         I(tempArrayDeviated2);
         //test
 
-
-
+        //-------------J-------------
+        int safeColumn = findSafeColumn(maArrayDeviated2);
+        //print answer
+        J(safeColumn);
 
     }
 
