@@ -212,7 +212,8 @@ public class main {
     //------------------------------------------------------I-----------------------------------------------------------
 
 
-    public static void BucketPositioner(int[][] array) {
+    public static int[] BucketPositioner(int[][] array) {
+        int[] coordinates = new int[];
         int[][] bucket = new int[3][3];
         int fires, Mfires = 0, Mcordx = 0, Mcordy = 0;
         for (int l = 0; l < (array.length) - 2; l++) {
@@ -238,10 +239,10 @@ public class main {
 
            }
        }
-       Coordinates[0]=Mfires;
-       Coordinates[1]=Mcordx+1;
-       Coordinates[2]=Mcordy+1;
-       return Coordinates;
+       coordinates[0]=Mfires;
+       coordinates[1]=Mcordx+1;
+       coordinates[2]=Mcordy+1;
+       return coordinates;
 
    }
    public static int BucketScore(int [][]Balde){
