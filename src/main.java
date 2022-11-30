@@ -139,19 +139,22 @@ public class main {
     }
 
     public static void E(float[] perc) {
+        System.out.println("e)");
+
         System.out.printf("MODERATE     : %.2f%n", perc[0]);
         System.out.printf("HIGH         : %.2f%n", perc[1]);
         System.out.printf("EXTREME      : %.2f%n", perc[2]);
         System.out.printf("CATASTROPHIC : %.2f%n", perc[3]);
+
         System.out.printf("%n");
 
     }
 
     //------------------------------------------------------F-----------------------------------------------------------
     //calculates temp rise to get catastrophic in all terrain
-    public static int findMin(int[][] array){
+    public static int findMin(int[][] array) {
         int min = array[0][0];
-        for(int l = 0; l < array.length; l++)
+        for (int l = 0; l < array.length; l++)
             for (int c = 0; c < array[l].length; c++)
                 if (min > array[l][c])
                     min = array[l][c];
@@ -186,11 +189,27 @@ public class main {
     public static void G(String [][]matempArraydevitated2,String[][]maTempArrayDevitated) {
         System.out.println("g)");
         System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n",alertChanged(matempArraydevitated2,maTempArrayDevitated));
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------H-----------------------------------------------------------
-    public static void H() {
+    // calculates new ma array for wind coming from north (if a tile is C south of that tile becomes C)
+    public static String[][] windFromNorth(String[][] maArray) {
+        String[][] array = maArray;
+        for (int l = array.length - 2; l >= 0; l--){
+            for(int c = 0; c < array[l].length; c++){
+                if(array[l][c].equals("C")){
+                    array[l + 1][c] = "C";
+                }
+            }
+        }
+        return array;
+    }
 
+    public static void H(String[][] array) {
+        System.out.println("h)");
+        printMAArray(array);
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------I-----------------------------------------------------------
@@ -256,24 +275,24 @@ public class main {
         readMetaData();
         int[][] tempArray = readArray();
 
-
         //-------------B-------------
         //print answer
         B(tempArray);
 
         //-------------C-------------
-        //Converter e imprimir mapa de alertas
+        //Convert temp to ma array
         String[][] ma = convertToMA(tempArray);
+        //print answer
         C(ma);
 
         //-------------D-------------
         // Calculate temp array with a deviation
-        final int Deviation = -10;
-        int[][] tempArrayDeviated = tempDeviation(tempArray, Deviation);
+        final int Deviation1 = -10;
+        int[][] tempArrayDeviated = tempDeviation(tempArray, Deviation1);
         String[][] maArrayDeviated = convertToMA(tempArrayDeviated);
         //print answer
         D(tempArrayDeviated, maArrayDeviated);
-        
+
         //-------------E-------------
         float[] alertPerc = alertPercentage(maArrayDeviated);
         E(alertPerc);
@@ -289,9 +308,16 @@ public class main {
         String [][]maTempArrayDeviated2= convertToMA(tempArrayDeviated2);
         G(maTempArrayDeviated2,maArrayDeviated);
 
-        //-------------I-------------
+        //-------------H-------------
+        //calculate new ma array for
+        String[][] windMaArray = windFromNorth(ma);
+        //print answer
+        H(windMaArray);
 
+        //-------------I-------------
         I(tempArrayDeviated2);
+
+
 
 
     }
