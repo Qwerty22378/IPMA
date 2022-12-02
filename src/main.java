@@ -186,6 +186,7 @@ public class main {
     public static void G(String[][] maArrayDevitated, float percChanged) {
         System.out.println("g)");
         printMAArray(maArrayDevitated);
+        System.out.printf("%n");
         System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n", percChanged);
         System.out.printf("%n");
     }
@@ -261,15 +262,16 @@ public class main {
        return fire;
        }
 
-    public static void I(int [][]tempArray) {
-        int []Coordinates=new int [3];
-        System.out.printf("i)%n");
+    public static void I(int [][] tempArray, int[] coordinates) {
+        System.out.println("i)");
         printTempArray(tempArray);
-        Coordinates=BucketPositioner(tempArray);
-        if (Coordinates[0]==0)
+        System.out.printf("%n");
+
+        if (coordinates[0]==0)
             System.out.printf("no fire%n");
         else
-            System.out.printf("drop water at (%d , %d)%n",Coordinates[1],Coordinates[2]);
+            System.out.printf("drop water at (%d , %d)%n",coordinates[1], coordinates[2]);
+        System.out.printf("%n");
     }
 
     //------------------------------------------------------J-----------------------------------------------------------
@@ -357,8 +359,10 @@ public class main {
         H(windMaArray);
 
         //-------------I-------------
-        I(tempArrayDeviated2);
-        //test
+        int[] coordinates = BucketPositioner(tempArray);
+        //print answer
+        I(tempArrayDeviated2, coordinates);
+
 
         //-------------J-------------
         int safeColumn = findSafeColumn(maArrayDeviated2);
