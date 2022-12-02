@@ -3,7 +3,7 @@ package src;
 import java.util.Scanner;
 
 public class main {
-    //-------------------------------------useful functions for all answers--------------------------------------------- static Scanner sc = new Scanner(System.in);
+    //-------------------------------------useful functions for all answers---------------------------------------------
     static Scanner sc = new Scanner(System.in);
     public static void printTempArray(int[][] array) {
         for (int l = 0; l < array.length; l++) {
@@ -173,19 +173,20 @@ public class main {
     //------------------------------------------------------G-----------------------------------------------------------
     //calculate the percentage of that changed
     public static float alertChanged(String[][] array, String[][] arrayD) {
-        int Changed = 0;
+        int changed = 0;
         for (int l = 0; l < array.length; l++) {
             for (int c = 0; c < array[l].length; c++) {
                 if (!(array[l][c].equals(arrayD[l][c])))
-                    Changed++;
+                    changed++;
             }
         }
-        return ((Changed / ((float) (array.length) * (array[0].length))) * 100);
+        return ((changed / ((float) (array.length) * (array[0].length))) * 100);
     }
 
-    public static void G(String[][] matempArraydevitated2, String[][] maTempArrayDevitated) {
+    public static void G(String[][] maArrayDevitated, float percChanged) {
         System.out.println("g)");
-        System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n", alertChanged(matempArraydevitated2, maTempArrayDevitated));
+        printMAArray(maArrayDevitated);
+        System.out.printf("Alert Levels changes due to temperature variations by 10ºC :%.2f%%%n", percChanged);
         System.out.printf("%n");
     }
 
@@ -344,7 +345,10 @@ public class main {
         final int Deviation2 = 10;
         int[][] tempArrayDeviated2 = tempDeviation(tempArrayDeviated1, Deviation2);
         String[][] maArrayDeviated2 = convertToMA(tempArrayDeviated2);
-        G(maArrayDeviated2, maArrayDeviated1);
+
+        float percChanged =alertChanged(maArrayDeviated1, maArrayDeviated2);
+        //print answer
+        G(maArrayDeviated2, percChanged);
 
         //-------------H-------------
         //calculate new maArray array for
@@ -360,7 +364,6 @@ public class main {
         int safeColumn = findSafeColumn(maArrayDeviated2);
         //print answer
         J(safeColumn);
-
     }
 
 
