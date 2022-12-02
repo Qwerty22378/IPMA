@@ -8,7 +8,7 @@ public class main {
     public static void printTempArray(int[][] array) {
         for (int l = 0; l < array.length; l++) {
             for (int c = 0; c < array[l].length; c++) {
-                System.out.printf("%3d", array[l][c]);
+                System.out.printf("%4d", array[l][c]);
             }
             System.out.printf("%n");
         }
