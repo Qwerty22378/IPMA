@@ -8,7 +8,7 @@ public class main {
     public static void printTempArray(int[][] array) {
         for (int l = 0; l < array.length; l++) {
             for (int c = 0; c < array[l].length; c++) {
-                System.out.printf("%4d", array[l][c]);
+                System.out.printf("%3d", array[l][c]);
             }
             System.out.printf("%n");
         }
@@ -137,10 +137,10 @@ public class main {
     public static void E(float[] perc) {
         System.out.println("e)");
 
-        System.out.printf("MODERATE     : %.2f%n", perc[0]);
-        System.out.printf("HIGH         : %.2f%n", perc[1]);
-        System.out.printf("EXTREME      : %.2f%n", perc[2]);
-        System.out.printf("CATASTROPHIC : %.2f%n", perc[3]);
+        System.out.printf("MODERATE     : %.2f%%%n", perc[0]);
+        System.out.printf("HIGH         : %.2f%%%n", perc[1]);
+        System.out.printf("EXTREME      : %.2f%%%n", perc[2]);
+        System.out.printf("CATASTROPHIC : %.2f%%%n", perc[3]);
 
         System.out.printf("%n");
 
@@ -213,7 +213,7 @@ public class main {
 
 
     public static int[] BucketPositioner(int[][] array) {
-        int[] coordinates = new int[];
+        int[] coordinates = new int[3];
         int[][] bucket = new int[3][3];
         int fires, Mfires = 0, Mcordx = 0, Mcordy = 0;
         for (int l = 0; l < (array.length) - 2; l++) {
@@ -245,11 +245,14 @@ public class main {
        return coordinates;
 
    }
+
    public static int BucketScore(int [][]Balde){
+        final int FireTemp = 50;
         int fire=0;
+
        for(int x=0; x<3; x++) {
            for (int y = 0; y < 3; y++) {
-            if (Balde[x][y]>=50)
+            if (Balde[x][y]>FireTemp)
                 fire++;
 
            }
